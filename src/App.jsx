@@ -25,10 +25,10 @@ export default function App() {
       const nextGrid = prevGrid.map(row => [...row]);
       if(nextGrid[i][j].value === 1) return nextGrid;
       nextGrid[i][j] = { value: 1, hue: hueValue };
-      if(i-1 >= 0) nextGrid[i-1][j] = { value: 1, hue: hueValue };
-      if(j-1 >= 0) nextGrid[i][j-1] = { value: 1, hue: hueValue };
-      if(i+1 < rows) nextGrid[i+1][j] = { value: 1, hue: hueValue };
-      if(j+1 < cols) nextGrid[i][j+1] = { value: 1, hue: hueValue };
+      if(i-1 >= 0 && nextGrid[i-1][j].value === 0) nextGrid[i-1][j] = { value: 1, hue: hueValue };
+      if(j-1 >= 0 && nextGrid[i][j-1].value === 0) nextGrid[i][j-1] = { value: 1, hue: hueValue };
+      if(i+1 < rows && nextGrid[i+1][j].value === 0) nextGrid[i+1][j] = { value: 1, hue: hueValue };
+      if(j+1 < cols && nextGrid[i][j+1].value === 0) nextGrid[i][j+1] = { value: 1, hue: hueValue };
       return nextGrid;
     });
   }
@@ -36,11 +36,17 @@ export default function App() {
   function fallSand() {
     setGrid(prevGrid => {
       const nextGrid = prevGrid.map(row => [...row]);
-      for (let i = rows - 1; i >= 0; i--) {
+      for (let i = 0; i < rows-1; i++) {
         for (let j = 0; j < cols; j++) {
-          if (prevGrid[i][j].value === 1 && i + 1 < rows && prevGrid[i + 1][j].value === 0) {
-            nextGrid[i][j] = { value: 0, hue: prevGrid[i][j].hue };
-            nextGrid[i + 1][j] = { value: 1, hue: prevGrid[i][j].hue };
+          if (prevGrid[i][j].value === 1) {
+            const dir = Math.random() < 0.5 ? 1 : -1;
+            if(prevGrid[i+1][j].value === 0) {
+              nextGrid[i][j] = { value: 0, hue: prevGrid[i][j].hue };
+              nextGrid[i+1][j] = { value: 1, hue: prevGrid[i][j].hue };
+            } else if (j+dir >= 0 && j+dir < cols && prevGrid[i+1][j+dir].value === 0) {
+              nextGrid[i][j] = { value: 0, hue: prevGrid[i][j].hue };
+              nextGrid[i+1][j+dir] = { value: 1, hue: prevGrid[i][j].hue };
+            }
           }
         }
       }
