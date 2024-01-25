@@ -12,7 +12,7 @@ export default function App() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       fallSand();
-    }, 10); 
+    }, 1); 
     return () => clearInterval(intervalId);
   }, []);
 
@@ -29,6 +29,8 @@ export default function App() {
       if(j-1 >= 0 && nextGrid[i][j-1].value === 0) nextGrid[i][j-1] = { value: 1, hue: hueValue };
       if(i+1 < rows && nextGrid[i+1][j].value === 0) nextGrid[i+1][j] = { value: 1, hue: hueValue };
       if(j+1 < cols && nextGrid[i][j+1].value === 0) nextGrid[i][j+1] = { value: 1, hue: hueValue };
+      if(i+1 < rows && j+1 < cols && nextGrid[i+1][j+1].value === 0) nextGrid[i+1][j+1] = { value: 1, hue: hueValue };
+      if(i-1 >= 0 && j-1 >= 0 && nextGrid[i-1][j-1].value === 0) nextGrid[i-1][j-1] = { value: 1, hue: hueValue };
       return nextGrid;
     });
   }
