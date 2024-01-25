@@ -5,7 +5,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-    <div style={{ textAlign: 'center' }}> SAND SIMULATOR </div>
+    <div style={{ textAlign: 'center', margin: '5px' }}> SAND SIMULATOR: drag mouse to drop sand </div>
     <App />
   </>,
 )

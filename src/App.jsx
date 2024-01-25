@@ -12,7 +12,7 @@ export default function App() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       fallSand();
-    }, 50); 
+    }, 1); 
     return () => clearInterval(intervalId);
   }, []);
 
@@ -74,9 +74,22 @@ export default function App() {
     return canvas;
   }
 
+  function resetSand () {
+    setGrid(prevGrid => {
+      const initialGrid = Array.from({ length: rows }, () => Array(cols).fill({ value: 0, hue: null }));
+      return initialGrid;
+    });
+    setHueValue(prev => 100);
+  }
+
   return (
-    <div className='playarea'>
-      {renderGrid()}
-    </div>
+    <>
+      <div className='playarea'>
+        {renderGrid()}
+      </div>
+      <div style={{ textAlign: 'center' }} >
+        <button onClick={resetSand}> Reset </button>
+      </div>
+    </>
   );
 }
