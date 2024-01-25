@@ -12,7 +12,7 @@ export default function App() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       fallSand();
-    }, 1); 
+    }, 1/10); 
     return () => clearInterval(intervalId);
   }, []);
 
