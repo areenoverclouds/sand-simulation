@@ -16,8 +16,8 @@ body {
   display: grid;
   height: 500px;
   width: 500px;
-  grid-template-columns: repeat(50, 10px);
-  grid-template-rows: repeat(50, 10px);
+  grid-template-columns: repeat(100, 5px);
+  grid-template-rows: repeat(100, 5px);
   overflow: hidden;
 }
 

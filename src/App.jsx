@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 
 export default function App() {
-  const rows = 50, cols = 50;
+  const rows = 100, cols = 100;
   const [grid, setGrid] = useState(() => {
     const initialGrid = Array.from({ length: rows }, () => Array(cols).fill({ value: 0, hue: null }));
     return initialGrid;
@@ -12,7 +12,7 @@ export default function App() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       fallSand();
-    }, 1); 
+    }, 10); 
     return () => clearInterval(intervalId);
   }, []);
 
@@ -55,7 +55,7 @@ export default function App() {
   }
 
   function renderGrid() {
-    const canvas = [];
+    let canvas = [];
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
         const { value, hue } = grid[i][j];
